@@ -11,11 +11,20 @@ plot4 <- function(file_path) {
     # use png device
     png(file = "plot4.png", width = 480, height = 480, units = "px")
 
-    # make the plot
+    # setup the plot
+    par(mfcol = c(2,2))
+
+    # make the first two plots (copied from plots 2 and 3)
+    plot(partofHousePowerCons$Time, partofHousePowerCons$Global_active_power, type = "l", ylab = "Global Active Power (kilowatts)", xlab = NA)
+
     plot(partofHousePowerCons$Time, partofHousePowerCons$Sub_metering_1, type = "l", ylab = "Energy sub metering", xlab = NA)
     lines(partofHousePowerCons$Time, partofHousePowerCons$Sub_metering_2, col = "red")
     lines(partofHousePowerCons$Time, partofHousePowerCons$Sub_metering_3, col = "blue")
-    legend(x = "topright", legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), col = c("black", "red", "blue"), lty = 1)
+    legend(x = "topright", legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), col = c("black", "red", "blue"), lty = 1, bty = "n")
+
+    # the two unique plots
+    plot(partofHousePowerCons$Time, partofHousePowerCons$Voltage, type = "l", ylab = "Voltage", xlab = "datetime")
+    plot(partofHousePowerCons$Time, partofHousePowerCons$Global_reactive_power, type = "l", ylab = "Global_reactive_power", xlab = "datetime")
 
     # turn off the png device
     dev.off()
